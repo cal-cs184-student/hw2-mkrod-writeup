@@ -56,8 +56,79 @@
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 		<h4>de Casteljau Algorithm</h4>
-		<p>The de casteljau algorithm is a recursive algorithm that takes a vector set of control points defining a bezier curve and continuously interpolates along each vector using a parameter. Each time step trims off the set of control points by 1 until a single control point is left which is guaranteed to lie on the bezier curve at the parameter used. I implemented the time step function by initializing an empty vector of control points and looping through the given set of points. I interpolated across each pair of control points and appended the value to the return array up until the second to last element since the array we are using doesn't have a value past the last element. </p>
+		<p>The de casteljau algorithm is a recursive algorithm that takes a vector set of control points defining a bezier curve and continuously interpolates along each vector using a parameter. Each time step trims off the set of control points by 1 until a single control point is left which is guaranteed to lie on the bezier curve at the parameter used. I implemented the time step function by initializing an empty vector of control points and looping through the given set of points. I interpolated across each pair of control points and appended the value to the return array up until the second to last element since the array we are using doesn't have a value past the last element. If it turns out the input array contains exactly 1 element, we return the array with one element since this marks the end of the de Casteljau algorithm.</p>
 
+		<h4>Screenshots</h4>
+
+		<h5>Unmodified (t constant and points unshifted)</h5>
+		<p>2x3 grid of personally made bezier curve with 6 time-steps denoting each phase of the de Casteljau algorithm.</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/personal0.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 0 of de Casteljau.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/personal1.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 1 of de Casteljau..</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/personal2.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 2 of de Casteljau.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/personal3.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 3 of de Casteljau.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/personal4.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 4 of de Casteljau.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/personal5.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at final time-step of de Casteljau.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<h5>Modified (T and points shifted)</h5>
+		<p>2x3 grid of personally made bezier curve that is modified, with 6 time-steps denoting each phase of the de Casteljau algorithm.</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/modified0.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 0 of de Casteljau.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/modified1.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 1 of de Casteljau..</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/modified2.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 2 of de Casteljau.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/modified3.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 3 of de Casteljau.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/modified4.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 4 of de Casteljau.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/modified5.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at final time-step of de Casteljau.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
 		<div style="display: flex; flex-direction: column; align-items: center;">
