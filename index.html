@@ -169,6 +169,33 @@
 		<h3>Part 4: Edge flip</h3>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
+		<h4>Edge Flip Implementation</h4>
+		<p>I started by recording every iterator (pointers) for every piece of the meshes we were mutating. A total of 4 vertices, 6 halfedges, and 2 faces. For the halfedges being flipped, otherwise known as the halfedge of the input edge iterator and its corresponding twin, reassign its neighbors: the next halfedge it pointed to, its origin vertex, its edge, and the face, all of which is recorded. For each of the remaining 4 halfedges, reassign its neighbors using the data we have and data we have updated. After this, update each vertex with their new halfedge. To make this implementation easier, I ran under the model of the edge flip from the image shown on the CS 184 website. I named each vertex a-d, and each halfedge hn, where n was a number between 1-6. Half edges incident to face 1 prior to the edge flip were between 1 and 3 (inclusive), and the rest were apart of face 2. Separation of data through naming conventions really helped.</p>
+		
+		<h5>Reference image for creating Edge flip:</h5>
+		<img src="assets/reference.png" width="400px"/>
+		<figcaption>Credits to CS 184 website at UC Berkeley.</figcaption>
+		<h4>Edge Flip Images</h4>
+
+		div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/t0edgeflip.png" width="400px"/>
+				  <figcaption>Edge has not been flipped</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/t1edgeflip.png" width="400px"/>
+				  <figcaption>Edge has been flipped (mouse centered on mesh area with flipped edge)</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/t2edgeflip.png" width="400px"/>
+				  <figcaption>Edge flip back to normal position (mouse area centered on mesh area with re-flipped edge).</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
 		<h3>Part 5: Edge split</h3>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
