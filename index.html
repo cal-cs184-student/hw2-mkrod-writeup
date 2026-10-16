@@ -199,6 +199,50 @@
 		<h3>Part 5: Edge split</h3>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
+		<h4>Edge splite Implementation</h4>
+		<p>I started by recording every element of the mesh to be mutated: the vertices, halfedges, faces, and edges. Then I followed by creating a new vertex and adding it to the meshes lists of vertices. By using the 2 vertices connected by the input edge, e0, the position of the new vertex was calculated. Afterwards, new edges, faces, and halfedges were created. The old and new halfedges were reassigned through setNeighbors. After all data for every halfedge has been filled out, every vertices halfedge attribute was reassigned accordingly, as well as every edges, and faces. In order to simplify the implementation of this algorithm, I set variable names corresponding to the image on the CS 184 website:</p>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+		    <img src="assets/edgespliteref.png" width="400px"/>
+		    <figcaption>Credit: CS184 Website at UC Berkeley.</figcaption>
+		</div>
+
+		<h4>Edge Split Images</h4>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/modified0.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 0 of de Casteljau.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/modified1.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 1 of de Casteljau..</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/modified2.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 2 of de Casteljau.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/modified3.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 3 of de Casteljau.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/modified4.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at time-step 4 of de Casteljau.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/modified5.png" width="400px"/>
+				  <figcaption>Bezier curve with 6 control points at final time-step of de Casteljau.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<h4>Debugging</h4>
+		<p>The difficulty arrived after a segmentation fault occured while trying to split an edge, causing the program to forcefully quit. A segmentation fault implies access to an restricted portion of memory. Thinking that this could be due to null pointer dereferencing, I read through my program multiple times trying to spot any errors in method calls, and stumbled across another error where I wrongfully assigned the name of a f3 to f2, meaning face allocation was being done improperly. After reading through my implementation, I came to a conclusion that the error was being made in the mesh trying to restructure beyond the vertices, since I only secured each modified vertices' halfedge element, completely disregarding each new face and edge halfedge element. After fixing this, I ran the program again and saw success.</p>
 		<h3>Part 6: Loop subdivision for mesh upsampling</h3>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
