@@ -106,7 +106,7 @@
 				</td>
 				<td style="text-align: center;">
 				  <img src="assets/modified1.png" width="400px"/>
-				  <figcaption>Bezier curve with 6 control points at time-step 1 of de Casteljau..</figcaption>
+				  <figcaption>Bezier curve with 6 control points at time-step 1 of de Casteljau.</figcaption>
 				</td>
 				<td style="text-align: center;">
 				  <img src="assets/modified2.png" width="400px"/>
@@ -212,34 +212,69 @@
 			<table style="width: 100%; text-align: center; border-collapse: collapse;">
 			  <tr>
 				<td style="text-align: center;">
-				  <img src="assets/modified0.png" width="400px"/>
-				  <figcaption>Bezier curve with 6 control points at time-step 0 of de Casteljau.</figcaption>
+				  <img src="assets/split0.png" width="400px"/>
+				  <figcaption>Split 1</figcaption>
 				</td>
 				<td style="text-align: center;">
-				  <img src="assets/modified1.png" width="400px"/>
-				  <figcaption>Bezier curve with 6 control points at time-step 1 of de Casteljau..</figcaption>
-				</td>
-				<td style="text-align: center;">
-				  <img src="assets/modified2.png" width="400px"/>
-				  <figcaption>Bezier curve with 6 control points at time-step 2 of de Casteljau.</figcaption>
+				  <img src="assets/split1.png" width="400px"/>
+				  <figcaption>Split 2.</figcaption>
 				</td>
 			  </tr>
 			  <tr>
 				<td style="text-align: center;">
-				  <img src="assets/modified3.png" width="400px"/>
-				  <figcaption>Bezier curve with 6 control points at time-step 3 of de Casteljau.</figcaption>
+				  <img src="assets/split2.png" width="400px"/>
+				  <figcaption>Split 3</figcaption>
 				</td>
 				<td style="text-align: center;">
-				  <img src="assets/modified4.png" width="400px"/>
-				  <figcaption>Bezier curve with 6 control points at time-step 4 of de Casteljau.</figcaption>
+				  <img src="assets/split3.png" width="400px"/>
+				  <figcaption>Split 4</figcaption>
 				</td>
 				<td style="text-align: center;">
-				  <img src="assets/modified5.png" width="400px"/>
-				  <figcaption>Bezier curve with 6 control points at final time-step of de Casteljau.</figcaption>
+				  <img src="assets/split4.png" width="400px"/>
+				  <figcaption>Split 5.</figcaption>
 				</td>
 			  </tr>
 			</table>
 		</div>
+
+		<h4>Flipped and Split Edges</h4>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+		    <h5>Subsequent changes follow order top->down, left->right.</h5>
+		</div>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/flip0.png" width="400px"/>
+				  <figcaption>Flipped Edge</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/flip1.png" width="400px"/>
+				  <figcaption>Second Edge below X is flipped.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/flip2.png" width="400px"/>
+				  <figcaption>Final flipped edge.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/flip0-split.png" width="400px"/>
+				  <figcaption>Initial flipped edge is split. Results in X.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/flip1-split.png" width="400px"/>
+				  <figcaption>Second flipped edge is split.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/flip2-split.png" width="400px"/>
+				  <figcaption>Final flipped edge is split.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
 
 		<h4>Debugging</h4>
 		<p>The difficulty arrived after a segmentation fault occured while trying to split an edge, causing the program to forcefully quit. A segmentation fault implies access to an restricted portion of memory. Thinking that this could be due to null pointer dereferencing, I read through my program multiple times trying to spot any errors in method calls, and stumbled across another error where I wrongfully assigned the name of a f3 to f2, meaning face allocation was being done improperly. After reading through my implementation, I came to a conclusion that the error was being made in the mesh trying to restructure beyond the vertices, since I only secured each modified vertices' halfedge element, completely disregarding each new face and edge halfedge element. After fixing this, I ran the program again and saw success.</p>
