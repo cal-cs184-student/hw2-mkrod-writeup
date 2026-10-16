@@ -278,22 +278,86 @@
 
 		<h4>Debugging</h4>
 		<p>The difficulty arrived after a segmentation fault occured while trying to split an edge, causing the program to forcefully quit. A segmentation fault implies access to an restricted portion of memory. Thinking that this could be due to null pointer dereferencing, I read through my program multiple times trying to spot any errors in method calls, and stumbled across another error where I wrongfully assigned the name of a f3 to f2, meaning face allocation was being done improperly. After reading through my implementation, I came to a conclusion that the error was being made in the mesh trying to restructure beyond the vertices, since I only secured each modified vertices' halfedge element, completely disregarding each new face and edge halfedge element. After fixing this, I ran the program again and saw success.</p>
+		
 		<h3>Part 6: Loop subdivision for mesh upsampling</h3>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-		<h2>(Optional) Section III: Potential Extra Credit - Art Competition: Model something Creative</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<h4>Subdivision implementation</h4>
+		<p>I implemented this operation by looping through the meshes set of vertices, marking each on as old, and calculating the new vertex position, storing this value in the temporary attribute "newPosition." Afterward, initialized an empty vector of edge iterators then looped through every edge. In this loop I added each edge to the vector of edge iterators and ensured every edge was marked as old, before calculating the position of new vertices to be placed in the center of the edge during a split and storing it in "newPosition." I then used the vector containing edge iterators to loop over old edges, splitting them and updating each returned vertex iterator with their new positions, stored in the edge, and ensuring they were marked as new. Then I looped through every edge for a final time to flip every new edge that connected a new vertex to an old one. The final portion iterated over every edge, and updated only the old vertices with their new position attributes.</p>
 
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
+		<h4>Subdivided Teapot</h4>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+		    <img src="assets/teapot3subdivs.png" width="400px"/>
+		    <figcaption>Teapot.png following 3 subdivisions.</figcaption>
+		</div>
+
+		<p>As a result of the image above, I found that subdivision tends to round off hard edges and corners, often times in very few subdivisions. You could reduce this by pre-splitting edges, more seen in cube.dae.</p>
+
+		<h4>Cube.dae Subdivisions</h4>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/cube0.png" width="400px"/>
+				  <figcaption>0 subdivisions</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/cube1.png" width="400px"/>
+				  <figcaption>1 subdivision.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/cube2.png" width="400px"/>
+				  <figcaption>2 subdivisions.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/cube3.png" width="400px"/>
+				  <figcaption>3 subdivisions.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<p>Above we see images of cube.dae subdivided over the course of 3 turns. We can see that the cube loses most of its original semblance very shortly into subdividing, rounding off its edges, and becoming rather lopsided. Below we see the effects of subdividing following edge splits.</p>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/preproccube0.png" width="400px"/>
+				  <figcaption>0 subdivisions</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/preproccube1.png" width="400px"/>
+				  <figcaption>1 subdivision.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/preproccube2.png" width="400px"/>
+				  <figcaption>1 subdivision (different angle).</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/preproccube3.png" width="400px"/>
+				  <figcaption>2 subdivisions.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/preproccube5.png" width="400px"/>
+				  <figcaption>3 subdivisions.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/preproccube4.png" width="400px"/>
+				  <figcaption>3 subdivisions (different angle).</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<p>Above we see the effect of subdivision under pre-edgesplitting operations. In the examples above, the cube was edge split on all 6 sides, such that the edges formed an "X" along every face of the cube. Usually, the cube is split diagonally with 1 edge the same way on every side of the cube, leading to improper proportions as the subdivisions approximate the new positions of vertices and edges. However, these images turn out to be much more uniform, maintaining a straighter shape as it subdivides rather than becoming lopsided. It is important to note that regardless of edge flips and edge splitting, subdividing will continue to round out edges and sharp lines.</p>
+
+		<h3>As such this concludes my work! Thank you so much and I apologize for the late submission. </h3>
 		</div>
 	</body>
 </html>
